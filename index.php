@@ -1,12 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sasa.popovic
- * Date: 10/17/2018
- * Time: 3:52 PM
- */
 session_start();
-include_once('dbcon.php');
+include_once('dbConnect.php');
 
 $error = false;
 if(isset($_POST['btn-login'])){
@@ -42,7 +36,7 @@ if(isset($_POST['btn-login'])){
 			$_SESSION['username'] = $row['username'];
 			header('location: home.php');
 		}else{
-			$errorMsg = 'Invalid Username or Password';
+			$errorMsg = 'Error logging you in.';
 		}
 	}
 }
@@ -51,42 +45,42 @@ if(isset($_POST['btn-login'])){
 
 <html>
 <head>
-	<title>PHP Login & Register</title>
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <title>Login & Register</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 </head>
 <body>
 <div class="container">
-	<div style="width: 500px; margin: 50px auto;">
-		<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete="off">
-			<center><h2>Login</h2></center>
-			<hr/>
+    <div style="width: 500px; margin: 50px auto;">
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete="off">
+            <center><h2>Login</h2></center>
+            <hr/>
 			<?php
 			if(isset($errorMsg)){
 				?>
-				<div class="alert alert-danger">
-					<span class="glyphicon glyphicon-info-sign"></span>
+                <div class="alert alert-danger">
+                    <span class="glyphicon glyphicon-info-sign"></span>
 					<?php echo $errorMsg; ?>
-				</div>
+                </div>
 				<?php
 			}
 			?>
-			<div class="form-group">
-				<label for="email" class="control-label">Email</label>
-				<input type="email" name="email" class="form-control" autocomplete="off">
-				<span class="text-danger"><?php if(isset($errorEmail)) echo $errorEmail; ?></span>
-			</div>
-			<div class="form-group">
-				<label for="password" class="control-label">Password</label>
-				<input type="password" name="password" class="form-control" autocomplete="off">
-				<span class="text-danger"><?php if(isset($errorPassword)) echo $errorPassword; ?></span>
-			</div>
-			<div class="form-group">
-				<center><input type="submit" name="btn-login" value="Login" class="btn btn-primary"></center>
-			</div>
-			<hr/>
-			<a href="register.php">Register</a>
-		</form>
-	</div>
+            <div class="form-group">
+                <label for="email" class="control-label">Email</label>
+                <input type="email" name="email" class="form-control" autocomplete="off">
+                <span class="text-danger"><?php if(isset($errorEmail)) echo $errorEmail; ?></span>
+            </div>
+            <div class="form-group">
+                <label for="password" class="control-label">Password</label>
+                <input type="password" name="password" class="form-control" autocomplete="off">
+                <span class="text-danger"><?php if(isset($errorPassword)) echo $errorPassword; ?></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" name="btn-login" value="Login" class="btn btn-primary">
+            </div>
+            <hr/>
+            <a href="register.php">Register</a>
+        </form>
+    </div>
 </div>
 </body>
 </html>

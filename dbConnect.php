@@ -5,9 +5,6 @@
  * Date: 10/17/2018
  * Time: 4:02 PM
  */
-
-namespace App\db;
-
 $serverName = 'localhost';
 $username = 'root';
 $password = '';

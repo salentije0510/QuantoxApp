@@ -5,7 +5,6 @@
  * Date: 10/17/2018
  * Time: 3:51 PM
  */
-namespace App;
 session_start();
 if(!isset($_SESSION['username'])){
 	header('location:index.php');
