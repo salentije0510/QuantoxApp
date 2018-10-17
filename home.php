@@ -33,7 +33,7 @@ if(isset($_POST['btn-search'])){
 			{
 				$users[] = $row;
 			}
-			$_SESSION['searchresult'] = $result;
+			$_SESSION['searchresult'] = $users;
 			header('location: result.php');
 		}else{
 			$errorMsg = 'There is no user with that email address.';
