@@ -18,13 +18,16 @@ if (isset($_SESSION['searchresult'])){
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 </head>
 <body>
-<ul>
-	<?php
-	foreach( $result as $user): ?>
-		<li><?= $city ?>
-		</li>
-	<?php endforeach; ?>
-</ul>
+<div class="container">
+	<div style="width: 500px; margin: 50px auto;">
+		<ul>
+			<?php
+			foreach( $result as $user): ?>
+				<li><?= $user['email'] ?></li>
+				<li><?= $user['username'] ?></li>
+			<?php endforeach; ?>
+		</ul>
+	</div>
 </div>
 </body>
 </html>

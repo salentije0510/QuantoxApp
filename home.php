@@ -15,17 +15,17 @@ if(isset($_POST['btn-search'])){
 	
 	if(!isset($_SESSION['username'])){
 		$error = true;
-		$errorEmail = 'In order to search for specified user login is required';
+		$errorUser = 'In order to search for specified user login is required';
 	}elseif(empty($email)){
 		$error = true;
-		$errorEmail = 'Please insert an email';
+		$errorUser = 'Please insert an email';
 	}elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
 		$error = true;
-		$errorEmail = 'Please insert a valid email address';
+		$errorUser = 'Please insert a valid email address';
 	}
 	
 	if(!$error){
-		$sql = "select * from tbl_users where email='$email' ";
+		$sql = "select * from tbl_users where email='$email' or username='$email' ";
 		$result = mysqli_query($conn, $sql);
 		$users = [];
 		if($result){
@@ -36,7 +36,7 @@ if(isset($_POST['btn-search'])){
 			$_SESSION['searchresult'] = $users;
 			header('location: result.php');
 		}else{
-			$errorMsg = 'There is no user with that email address.';
+			$errorMsg = 'There is no user with that username or an email address.';
 		}
 	}
 }
@@ -66,9 +66,9 @@ if(isset($_POST['btn-search'])){
 			}
 			?>
             <div class="form-group">
-                <label for="email" class="control-label">Email</label>
-                <input type="email" name="email" class="form-control" autocomplete="off">
-                <span class="text-danger"><?php if(isset($errorEmail)) echo $errorEmail; ?></span>
+                <label for="user" class="control-label">User</label>
+                <input type="user" name="user" class="form-control" autocomplete="off">
+                <span class="text-danger"><?php if(isset($errorUser)) echo $errorUser; ?></span>
             </div>
             <div class="form-group">
                 <input type="submit" name="btn-search" value="Search" class="btn btn-primary">
