@@ -45,14 +45,14 @@ if(isset($_POST['btn-login'])){
 
 <html>
 <head>
-    <title>Login & Register</title>
+    <title>Login</title>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 </head>
 <body>
 <div class="container">
     <div style="width: 500px; margin: 50px auto;">
         <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete="off">
-            <center><h2>Login</h2></center>
+            <h2>Login</h2>
             <hr/>
 			<?php
 			if(isset($errorMsg)){

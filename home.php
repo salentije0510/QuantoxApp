@@ -6,22 +6,76 @@
  * Time: 3:51 PM
  */
 session_start();
-if(!isset($_SESSION['username'])){
-	header('location:index.php');
+include_once('dbConnect.php');
+
+$error = false;
+if(isset($_POST['btn-search'])){
+	$email = trim($_POST['email']);
+	$email = htmlspecialchars(strip_tags($email));
+	
+	if(!isset($_SESSION['username'])){
+		$error = true;
+		$errorEmail = 'In order to search for specified user login is required';
+	}elseif(empty($email)){
+		$error = true;
+		$errorEmail = 'Please insert an email';
+	}elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+		$error = true;
+		$errorEmail = 'Please insert a valid email address';
+	}
+	
+	if(!$error){
+		$sql = "select * from tbl_users where email='$email' ";
+		$result = mysqli_query($conn, $sql);
+		$users = [];
+		if($result){
+			while($row = $result->fetch_array())
+			{
+				$users[] = $row;
+			}
+			$_SESSION['searchresult'] = $result;
+			header('location: result.php');
+		}else{
+			$errorMsg = 'There is no user with that email address.';
+		}
+	}
 }
 ?>
 
 <html>
 <head>
-	<title>Login and Register</title>
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 </head>
 <body>
 <div class="container">
-	<a href="logout.php">Logout</a>
-	<div style="width: 500px; margin: 50px auto;">
-		<h3>Welcome <?php echo $_SESSION['username']; ?></h3
-	</div>
+    <div style="width: 500px; margin: 50px auto;">
+        <a href="login.php">Login</a>
+        <a href="register.php">Register</a>
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete="off">
+            <h2>Search user</h2>
+            <hr/>
+			<?php
+			if(isset($errorMsg)){
+				?>
+                <div class="alert alert-danger">
+                    <span class="glyphicon glyphicon-info-sign"></span>
+					<?php echo $errorMsg; ?>
+                </div>
+				<?php
+			}
+			?>
+            <div class="form-group">
+                <label for="email" class="control-label">Email</label>
+                <input type="email" name="email" class="form-control" autocomplete="off">
+                <span class="text-danger"><?php if(isset($errorEmail)) echo $errorEmail; ?></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" name="btn-search" value="Search" class="btn btn-primary">
+            </div>
+            <hr/>
+        </form>
+    </div>
 </div>
 </body>
 </html>

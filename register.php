@@ -55,7 +55,7 @@ if(isset($_POST['btn-register'])){
 		$sql = "insert into tbl_users(username, email ,password)
                 values('$username', '$email', '$password')";
 		if(mysqli_query($conn, $sql)){
-			$successMsg = 'Register successfully. <a href="index.php">click here to login</a>';
+			$successMsg = 'Register successfully. <a href="login.php">click here to login</a>';
 		}else{
 			echo 'Error ' . mysqli_error($conn);
 		}
@@ -110,7 +110,7 @@ if(isset($_POST['btn-register'])){
                 <center><input type="submit" name="btn-register" value="Login" class="btn btn-primary"></center>
             </div>
             <hr/>
-            <a href="index.php">Login</a>
+            <a href="login.php">Login</a>
         </form>
     </div>
 </div>

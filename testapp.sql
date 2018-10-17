@@ -31,9 +31,7 @@ CREATE TABLE `tbl_users` (
 
 /*Data for the table `tbl_users` */
 
-insert  into `tbl_users`(`id`,`username`,`email`,`password`) values (1,'salentije','salentije@gmail.com','e10adc3949ba59abbe56e057f20f883e'),
-(2,'borko','borko@gmail.com','e10adc3949ba59abbe56e057f20f883e'),
-(3,'slavko','slavko@gmail.com','e10adc3949ba59abbe56e057f20f883e');
+insert  into `tbl_users`(`id`,`username`,`email`,`password`) values (1,'salentije','salentije@gmail.com','e10adc3949ba59abbe56e057f20f883e'),(2,'borko','borko@gmail.com','e10adc3949ba59abbe56e057f20f883e');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
